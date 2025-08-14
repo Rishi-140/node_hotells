@@ -54,6 +54,8 @@ route.delete('/:id',async(req,res)=>{
         console.log(err)
          res.status(500).json({error:'Internal server issue'}) 
          console.log("hiii")
+         console.log("hiii")
+
 
     }
     
