@@ -1,6 +1,6 @@
-const express=require('express')
-const route=express.Router()
-const Menuitems=require('./../Menuitems')
+const express = require('express')
+const route = express.Router()
+const Menuitems = require('./../Menuitems')
 
 
 route.post('/', async (req, res) => {
@@ -40,25 +40,25 @@ route.get('/', async (req, res) => {
 
     }
 })
-route.delete('/:id',async(req,res)=>{
-    try{
-        const deleteid= req.params.id;
-        const response= await Menuitems.findByIdAndDelete(deleteid)
-        if(!response){
-            return res.status(404).json({error: "person not found"})
+route.delete('/:id', async (req, res) => {
+    try {
+        const deleteid = req.params.id;
+        const response = await Menuitems.findByIdAndDelete(deleteid)
+        if (!response) {
+            return res.status(404).json({ error: "person not found" })
         }
         console.log("person deleted")
-         res.status(200).json({error:'deleted successfully'})
+        res.status(200).json({ error: 'deleted successfully' })
 
-    }catch(err){
+    } catch (err) {
         console.log(err)
-         res.status(500).json({error:'Internal server issue'}) 
-         console.log("Commited by shubham on 15 august 2025")
-
+        res.status(500).json({ error: 'Internal server issue' })
+        console.log("Commited by shubham on 15 august 2025");
+        console.log("hello");
 
     }
-    
+
 })
 
 
-module.exports=route;
+module.exports = route;
