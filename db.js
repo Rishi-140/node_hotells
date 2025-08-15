@@ -1,28 +1,21 @@
-var mongoose=require('mongoose')
+const mongoose = require('mongoose');
 
-const mongoURL= 'mongodb://127.0.0.1:27017/hotel'
+const mongoURL = 'mongodb+srv://pawarrishikesh53:8lFuAOIpKx6eG7eT@cluster0.gfwudrc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
-mongoose.connect(mongoURL,{
-    useNewUrlParser :true,
-    useUnifiedTopology :true
-})
+(async () => {
+  try {
+    await mongoose.connect(mongoURL);
+    console.log('✅ Connected to MongoDB');
+  } catch (err) {
+    console.error('❌ MongoDB connection error:', err);
+  }
+})();
 
-const db=mongoose.connection;
+const db = mongoose.connection;
 
-// define event listner for database connection
-db.on('connected',()=>{
+// Event listeners (optional but good for debugging)
+db.on('disconnected', () => {
+  console.log('🔌 Disconnected from MongoDB');
+});
 
-    console.log('Connected to MongoDB')
-})
-
-db.on('disconnected',()=>{
-
-    console.log('disconneted to MongoDB')
-})
-
-db.on('error',(err)=>{
-
-    console.log('Error ',err)
-})  
-
-module.exports=db;
+module.exports = db;
