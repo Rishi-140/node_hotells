@@ -45,13 +45,18 @@ app.use(bodyparser.json());
 
 require('dotenv').config()
 
+const consolelog=(req,res,next)=>{
+    console.log(`[${new Date().toLocaleString()}] Request made to :${req.originalUrl}`);
+    next();
+}
+
 
 
 const menuroutes=require('./Routes/MenuRoutes')
 app.use('/items',menuroutes)
  
 const personroutes=require('./Routes/PersonRoutes');
-app.use('/person',personroutes)
+app.use('/person',consolelog,personroutes)
 
 
 // const personroutes=require('./Routes/PersonRoutes');
