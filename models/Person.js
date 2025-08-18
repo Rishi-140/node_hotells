@@ -51,6 +51,29 @@ const personSchema=new mongoose.Schema({
 
 });
 
+personSchema.pre('save',async(next)=>{
+
+    const person= this;
+    if(!person.isModified('password')) return next();
+    try{
+
+        const salt = await bcrypt.genSalt(10)
+        const hashedpassword= await bcrypt.hash(person.password,salt);
+        person.password=hashedpassword;
+        next();
+    }catch(err){
+        return next(err)
+    }
+})
+personSchema.methods.comparePassword=async function(candidatepassword) {
+    try{
+        const ismatch=await bcrypt.compare(candidatepassword,this.password)
+        return ismatch
+    }catch(err){
+        throw err;
+    }
+}
+
 //define person model
 
 const Person=mongoose.model('Person',personSchema)
