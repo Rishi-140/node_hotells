@@ -77,7 +77,7 @@ try{
 }))
 app.use(passport.initialize())
 
-app.get('/',passport.authenticate('local',{session:false}),(req,res)=>{
+app.get('/',(req,res)=>{
     res.send('welcome');
 })
 
@@ -87,7 +87,7 @@ const menuroutes=require('./Routes/MenuRoutes')
 app.use('/items',menuroutes)
  
 const personroutes=require('./Routes/PersonRoutes');
-app.use('/person',personroutes)
+app.use('/person',passport.authenticate('local',{session:false}),personroutes)
 
 
 // const personroutes=require('./Routes/PersonRoutes');
