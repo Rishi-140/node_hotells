@@ -43,6 +43,8 @@ const app = Express()
 const bodyparser = require('body-parser')
 app.use(bodyparser.json());
 
+require('dotenv').config()
+
 
 
 const menuroutes=require('./Routes/MenuRoutes')
@@ -57,13 +59,13 @@ app.use('/person',personroutes)
 
 
 
+const Port = process.env.PORT||4000
 
 
 
 
 
-
-app.listen(4000, () => { console.log("server is on 4000 again") })
+app.listen(Port, () => { console.log("server is on 4000 again") })
 
 
 
