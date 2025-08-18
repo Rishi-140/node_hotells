@@ -47,9 +47,9 @@ const Person = require('./models/Person')
 require('dotenv').config()
 
 const passport = require('passport')
-const localstrategy = require('passport').Strategy
+const localstrategy= require('passport').Strategy
 
-const logRequest = (req, res, next) => {
+const logRequest= (req ,res , next)=>{
     console.log(`[${new Date().toLocaleString()}] Request made to :${req.originalUrl}`);
     next();
 }
@@ -57,32 +57,33 @@ const logRequest = (req, res, next) => {
 app.use(logRequest);
 
 
-// passport.use(new localstrategy(async(USERNAME,PASSWORD,done)=>{
-// try{
-//     console.log("Recevied Credential",USERNAME,PASSWORD)
-//     const user= await Person.findOne({username:USERNAME})
-//     if(!user){
-//         return done(null, false,{message:'Incorrect username'})
-//     }
-//     const ispasswordmatch=user.password===PASSWORD ? true:false
-//     if(ispasswordmatch){
-//         return done(null,user)
-//     }
-//     else{
-//          return done(null, false,{message:'Incorrect password'})
-//     }}
-//     catch(err){
-//          return (err)
-//     }
-// }))
+passport.use(new localstrategy(async(USERNAME,PASSWORD,done)=>{
+try{
+    console.log("Recevied Credential",USERNAME,PASSWORD)
+    const user= await Person.findOne({username:USERNAME})
+    if(!user){
+        return done(null, false,{message:'Incorrect username'})
+    }
+    const ispasswordmatch=user.password===PASSWORD ? true:false
+    if(ispasswordmatch){
+        return done(null,user)
+    }
+    else{
+         return done(null, false,{message:'Incorrect password'})
+    }}
+    catch(err){
+         return (err)
+    }
+}))
+app.use(passport.initialize())
 
 
 
-const menuroutes = require('./Routes/MenuRoutes')
-app.use('/items', menuroutes)
-
-const personroutes = require('./Routes/PersonRoutes');
-app.use('/person', personroutes)
+const menuroutes=require('./Routes/MenuRoutes')
+app.use('/items',menuroutes)
+ 
+const personroutes=require('./Routes/PersonRoutes');
+app.use('/person',passport.authenticate('local',{session:false}),personroutes)
 
 
 // const personroutes=require('./Routes/PersonRoutes');
@@ -90,7 +91,7 @@ app.use('/person', personroutes)
 
 
 
-const Port = process.env.PORT || 4000
+const Port = process.env.PORT||4000
 
 
 
