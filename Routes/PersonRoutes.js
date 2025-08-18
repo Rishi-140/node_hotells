@@ -113,9 +113,9 @@ router.put('/', async (req, res) => {
 
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/', async (req, res) => {
     try {
-        const deleteid = req.params.id;
+        const deleteid = req.body.id;
         const response = await Person.findByIdAndDelete(deleteid)
         if (!response) {
             return res.status(404).json({ error: "person not found" })

@@ -40,21 +40,20 @@ route.get('/', async (req, res) => {
 
     }
 })
-route.delete('/:id', async (req, res) => {
+route.delete('/', async (req, res) => {
     try {
-        const deleteid = req.params.id;
-        const response = await Menuitems.findByIdAndDelete(deleteid)
+        const deleteid = req.body.name;
+        const response = await Menuitems.findOneAndDelete(deleteid)
         if (!response) {
             return res.status(404).json({ error: "person not found" })
         }
         console.log("person deleted")
-        res.status(200).json({ error: 'deleted successfully' })
+        res.status(200).json({succesfully: 'deleted successfully' })
 
     } catch (err) {
         console.log(err)
         res.status(500).json({ error: 'Internal server issue' })
-        console.log("Commited by shubham on 15 august 2025");
-        console.log("hello");
+        
 
     }
 
