@@ -64,7 +64,7 @@ try{
     if(!user){
         return done(null, false,{message:'Incorrect username'})
     }
-    const ispasswordmatch=user.password===PASSWORD ? true:false
+    const ispasswordmatch=(user.password === PASSWORD ? true:false)
     if(ispasswordmatch){
         return done(null,user)
     }
@@ -72,7 +72,7 @@ try{
          return done(null, false,{message:'Incorrect password'})
     }}
     catch(err){
-         return (err)
+         return done(err)
     }
 }))
 app.use(passport.initialize())
