@@ -77,7 +77,7 @@ try{
 }))
 app.use(passport.initialize())
 
-app.use('/',passport.authenticate('local',{session:false}),(req,res)=>{
+app.get('/',passport.authenticate('local',{session:false}),(req,res)=>{
     res.send('welcome');
 })
 
