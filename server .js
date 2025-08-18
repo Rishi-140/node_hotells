@@ -47,7 +47,7 @@ const Person = require('./models/Person')
 require('dotenv').config()
 
 const passport = require('passport')
-const localstrategy= require('passport').Strategy
+const localstrategy= require('passport-local').Strategy
 
 const logRequest= (req ,res , next)=>{
     console.log(`[${new Date().toLocaleString()}] Request made to :${req.originalUrl}`);
