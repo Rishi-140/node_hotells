@@ -45,7 +45,7 @@ app.use(bodyparser.json());
 
 require('dotenv').config()
 
-const logrequest=(req,res,next)=>{
+const logrequest= (req ,res , next)=>{
     console.log(`[${new Date().toLocaleString()}] Request made to :${req.originalUrl}`);
     next();
 }
