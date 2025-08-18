@@ -38,16 +38,16 @@ console.log(SStojson)*/
 const Express = require('express')
 const db = require('./db')
 const app = Express()
+const passport=require('./Auth')
 
 
 const bodyparser = require('body-parser')
 app.use(bodyparser.json());
-const Person = require('./models/Person')
+
 
 require('dotenv').config()
 
-const passport = require('passport')
-const localstrategy= require('passport-local').Strategy
+
 
 const logRequest= (req ,res , next)=>{
     console.log(`[${new Date().toLocaleString()}] Request made to :${req.originalUrl}`);
@@ -57,31 +57,15 @@ const logRequest= (req ,res , next)=>{
 app.use(logRequest);
 
 
-passport.use(new localstrategy(async(USERNAME,PASSWORD,done)=>{
-try{
-    console.log("Recevied Credential",USERNAME,PASSWORD)
-    const user= await Person.findOne({username:USERNAME})
-    if(!user){
-        return done(null, false,{message:'Incorrect username'})
-    }
-    const ispasswordmatch=(user.password === PASSWORD ? true:false)
-    if(ispasswordmatch){
-        return done(null,user)
-    }
-    else{
-         return done(null, false,{message:'Incorrect password'})
-    }}
-    catch(err){
-         return done(err)
-    }
-}))
-app.use(passport.initialize())
+
 
 app.get('/',(req,res)=>{
     res.send('welcome');
 })
 
 
+
+app.use(passport.initialize())
 
 const menuroutes=require('./Routes/MenuRoutes')
 app.use('/items',menuroutes)
