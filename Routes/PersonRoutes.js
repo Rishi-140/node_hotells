@@ -12,7 +12,7 @@ router.post('/signup', async (req, res) => {
         console.log('Data Saved');
         // res.status(200).json(response);
         const token1 = generatetoken(response.username)
-        console.log("Token is :",token1)
+        console.log("Token is :", token1)
         res.status(200).json({ response: response , token1 :token1 });
     }
     catch (err) {
