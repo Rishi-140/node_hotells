@@ -8,7 +8,7 @@ try{
     if(!user){
         return done(null, false,{message:'Incorrect username'})
     }
-    const ispasswordmatch=await user.comparePassword('PASSWORD')
+    const ispasswordmatch=await user.comparePassword(PASSWORD)
     if(ispasswordmatch){
         return done(null,user)
     }
