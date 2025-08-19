@@ -1,4 +1,5 @@
 const jwt=require('jsonwebtoken')
+
 require('dotenv').config()
 
 const jwtAuthMiddleware=(req,res,next)=>{
@@ -7,7 +8,8 @@ const jwtAuthMiddleware=(req,res,next)=>{
     if(!token) return res.status(401).json({error:'Unarthorized'})
 
         try{
-            const decoded= jwt.verify(token,process.env.JWT_SECRET)
+            const i=process.env.JWT_SECRET
+            const decoded= jwt.verify(token,i)
             req.user=decoded
             next();
 
@@ -22,7 +24,7 @@ const jwtAuthMiddleware=(req,res,next)=>{
 
 const generateToken=(userdata)=>{
 
-    return jwt.sign(userdata,process.env.JWT_SECRET)
+    return jwt.sign(userdata,i)
 }
 
 module.exports={jwtAuthMiddleware,generateToken}
