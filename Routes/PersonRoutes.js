@@ -10,9 +10,9 @@ router.post('/signup', async (req, res) => {
         const response = await newPerson.save();
         console.log('Data Saved');
         // res.status(200).json(response);
-        const token = generatetoken(response.username)
-        console.log("Token is :",token)
-        res.status(200).json({ response: response , token :token });
+        const token1 = generatetoken(response.username)
+        console.log("Token is :",token1)
+        res.status(200).json({ response: response , token1 :token1 });
     }
     catch (err) {
 
