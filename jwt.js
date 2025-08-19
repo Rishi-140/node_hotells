@@ -9,7 +9,7 @@ const jwtAuthMiddleware=(req,res,next)=>{
         try{
             const decoded= jwt.verify(token,process.env.Jwt_secret)
             req.user=decoded
-            next()
+            next();
 
 
         }catch(err){
