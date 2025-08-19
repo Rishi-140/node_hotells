@@ -71,8 +71,8 @@ const menuroutes=require('./Routes/MenuRoutes')
 app.use('/items',menuroutes)
  
 const personroutes=require('./Routes/PersonRoutes');
-app.use('/person',passport.authenticate('local',{session:false}),personroutes)
-
+//app.use('/person',passport.authenticate('local',{session:false}),personroutes)
+app.use('/person',personroutes)
 
 // const personroutes=require('./Routes/PersonRoutes');
 // app.use('/updatevalue',personroutes)
