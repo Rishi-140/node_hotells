@@ -25,4 +25,4 @@ const generateToken=(userdata)=>{
     return jwt.sign(userdata,process.env.Jwt_secret)
 }
 
-module.exports={jwtAuthMiddleware,generatetoken}
+module.exports={jwtAuthMiddleware,generateToken}
