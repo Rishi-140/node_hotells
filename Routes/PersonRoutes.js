@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Person = require('./../models/Person');
-const {jwtAuthMiddleware,generateToken}=require('./../jwt')
+const {jwtAuthMiddleware,generateToken} = require('./../jwt')
 require('dotenv').config()
 router.post('/signup', async (req, res) => {
     try {
@@ -10,10 +10,7 @@ router.post('/signup', async (req, res) => {
         const newPerson = new Person(data);
         const response = await newPerson.save();
         console.log('Data Saved');
-        const token = generateToken({ 
-            username: response.username, 
-            email: response.email 
-        });
+        const token = generateToken(response.username)
         console.log("Token is :", token)
         res.status(200).json({ response: response , token :token });
     }
