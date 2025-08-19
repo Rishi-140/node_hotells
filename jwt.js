@@ -20,7 +20,7 @@ const jwtAuthMiddleware=(req,res,next)=>{
 
 }
 
-const generatetoken=(userdata)=>{
+const generateToken=(userdata)=>{
 
     return jwt.sign(userdata,process.env.Jwt_secret)
 }
