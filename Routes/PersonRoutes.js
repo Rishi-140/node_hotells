@@ -48,10 +48,12 @@ router.post('/login', async(req,res)=>{
 
 })
 
-router.get('/',jwtAuthMiddleware, async (req, res) => {
+router.get('/profile',jwtAuthMiddleware, async (req, res) => {
 
     try {
-        const data = await Person.find()
+        const dataid=req.user
+        const datar=dataid.id
+        const data = await Person.findOne(datar)
         console.log("fetched Succesfully");
         res.status(200).json(data)
 
