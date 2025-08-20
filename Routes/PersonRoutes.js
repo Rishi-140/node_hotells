@@ -53,7 +53,7 @@ router.get('/profile',jwtAuthMiddleware, async (req, res) => {
     try {
         const dataid=req.user
         const datar=dataid.id
-        const data = await Person.findOne(datar)
+        const data = await Person.findOne({_id :datar})
         console.log("fetched Succesfully");
         res.status(200).json(data)
 
