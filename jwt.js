@@ -1,5 +1,6 @@
-const jwt=require('jsonwebtoken')
 require('dotenv').config()
+const jwt=require('jsonwebtoken')
+
 
 
 const jwtAuthMiddleware=(req, res, next)=>{
@@ -21,10 +22,13 @@ const jwtAuthMiddleware=(req, res, next)=>{
 
 }
 
-const generateToken=(userinfo)=>{
 
-    return jwt.sign(userinfo,process.env.JWT_SECRET);
 
-}
+const generateToken = (userinfo) => {
+    if (!process.env.JWT_SECRET) {
+        throw new Error("JWT_SECRET is missing");
+    }
+    return jwt.sign(userinfo, process.env.JWT_SECRET);
+};
 
 module.exports={jwtAuthMiddleware,generateToken}
