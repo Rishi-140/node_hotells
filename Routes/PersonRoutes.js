@@ -26,6 +26,27 @@ router.post('/signup', async (req, res) => {
 
 });
 
+router.post('/login', async(req,res)=>{
+    try{
+
+        const {username,password}=req.body;
+        const user = await Person.findOne({username:username})
+        if(!user||!(await user.comparePassword(password))){
+
+            return res.status(401).json({error:'Invalid username or password'})
+        }
+        const payload={id : user.id,username :user.username}
+        const token= generateToken(payload)
+        res.json({token})
+
+
+    }catch(err){
+
+        console.log(err)
+        res.status(500).json({error:'Internal Server error'})
+    }
+
+})
 
 router.get('/', async (req, res) => {
 
