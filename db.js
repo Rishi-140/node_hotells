@@ -7,6 +7,7 @@ const mongoURL = process.env.MongoURL;
   try {
     await mongoose.connect(mongoURL);
     console.log('✅ Connected to MongoDB');
+    console.log(process.env.jwtsecret);
   } catch (err) {
     console.error('❌ MongoDB connection error:', err);
   }

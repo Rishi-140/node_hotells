@@ -9,7 +9,7 @@ const jwtAuthMiddleware=(req, res, next)=>{
     if(!token) return res.status(401).json({error:'Unarthorized'})
 
         try{
-            const decoded= jwt.verify(token,process.env.JWT_SECRET)
+            const decoded= jwt.verify(token,process.env.jwtsecret)
             req.user=decoded
             next();
 
@@ -24,7 +24,7 @@ const jwtAuthMiddleware=(req, res, next)=>{
 
 const generateToken=(userinfo)=>{
 
-    return jwt.sign(userinfo,process.env.JWT_SECRET);
+    return jwt.sign(userinfo,process.env.jwtsecret);
 
 }
 
