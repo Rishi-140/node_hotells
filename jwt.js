@@ -21,14 +21,13 @@ const jwtAuthMiddleware=(req, res, next)=>{
 
 
 }
+const JWT_SECRET='MySuperSecretKey1230'
+const generateToken=(userinfo)=>{
+
+    return jwt.sign(userinfo,JWT_SECRET);
+
+}
 
 
-
-const generateToken = (userinfo) => {
-    if (!process.env.JWT_SECRET) {
-        throw new Error("JWT_SECRET is missing");
-    }
-    return jwt.sign(userinfo, process.env.JWT_SECRET);
-};
 
 module.exports={jwtAuthMiddleware,generateToken}
